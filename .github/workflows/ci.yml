@@ -686,6 +686,7 @@ jobs:
             runner: ${{ (github.repository_owner == 'AcademySoftwareFoundation' && 'ubuntu-20.04-gpu-t4-4c-16g-176h') || 'ubuntu-latest' }}
             container: aswf/ci-osl:2025-clang18.2
             cxx_std: 17
+            openimageio_ver: release
             python_ver: "3.11"
             pybind11_ver: v2.11.1
             simd: avx2,f16c
@@ -693,3 +694,9 @@ jobs:
             setenvs: export OSL_CMAKE_FLAGS="-DOSL_USE_OPTIX=1"
                             OPTIX_VERSION=8.0.0
                             CTEST_EXCLUSIONS="broken|render-microfacet|example-cuda|python-oslquery"
+                            USE_JXL=0
+            depcmds: >
+                sudo rm -rf /usr/local/include/OpenImageIO &&
+                sudo rm -rf /usr/local/lib*/cmake/OpenImageIO &&
+                sudo rm -rf /usr/local/lib*/libOpenImageIO* &&
+                sudo rm -rf /usr/local/lib*/python*/site-packages/OpenImageIO*
