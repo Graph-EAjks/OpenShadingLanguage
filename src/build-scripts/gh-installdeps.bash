@@ -58,6 +58,12 @@ if [[ "$ASWF_ORG" != ""  ]] ; then
         ls -R conan
     fi
 
+    if [[ "${OSL_YUM_CLEAN}" != "" ]] ; then
+        df -h .
+        time sudo yum clean packages
+        df -h .
+    fi
+
     if [[ "$CXX" == "icpc" || "$CC" == "icc" || "$USE_ICC" != "" ]] ; then
         # Lock down icc to 2022.1 because newer versions hosted on the Intel
         # repo require a glibc too new for the ASWF CentOS7-based containers
